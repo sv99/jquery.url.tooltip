@@ -15,13 +15,21 @@ getTooltip = (url, cb) => {
       })
       .then(function(text) {
         console.log('Request successful', text);
-        cb('<pre>' + text + '</pre>')
+        cb(text)
       })
 }
 
 $("p.tooltip").tooltip({
-  bodyHandler: (el, cb) => getTooltip('/tooltip/', cb)
+  bodyHandler: (el, cb) => getTooltip('/tooltip/', cb),
+  pre: true,
 });
 ```
 
 `el` in the callback need for access to the tooltip element.
+
+Params
+------
+
+`bodyHandler` - called by the pluging for get tooltip body.
+
+`pre: false` - surround tooltip text with tag `<pre>`.
