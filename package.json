@@ -1,0 +1,11 @@
+{
+  "name": "jquery.url.tooltip",
+  "license": "MIT",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "serve": "node src/server.js"
+  }
+}

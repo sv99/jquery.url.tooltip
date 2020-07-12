@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <link rel="stylesheet" href="/css/jquery.tooltip.css" type="text/css" />
+  <script src="/js/jquery-3.5.1.js"></script>
+<!--  <script src="/js/jquery-migrate-1.4.1.js"></script>-->
+  <script src="/js/jquery.url.tooltip.js"></script>
+  <script type="module" src="/js/ky-0.2.0.min.js"></script>
+</head>
+<body>
+<h1>Заголовок</h1>
+
+<p class="tooltip">Первый тултип</p>
+
+<table>
+  <tr id="100">
+    <td>
+      <p class="tooltip1">Второй тултип</p>
+    </td>
+  </tr>
+  <tr id="300">
+    <td>
+      <p class="tooltip1">Третий тултип</p>
+    </td>
+  </tr>
+</table>
+<script>
+  getTooltip = (url, cb) => {
+    fetch(url)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        console.log('Request successful', text);
+        cb('<pre>' + text + '</pre>')
+      })
+  }
+
+  (function($) {
+    $(document).ready(function() {
+      console.log('Ok Ok');
+      // form.filter - all/active
+
+      $("p.tooltip").tooltip({
+        bodyHandler: (el, cb) => getTooltip('/tooltip/', cb)
+      });
+      $("p.tooltip1").tooltip({
+        bodyHandler: (el, cb) => {
+          const url = '/tooltip/' + $(el).parent().parent().attr('id')
+          getTooltip(url, cb)
+        },
+        fade: true,
+      });
+    });
+  })(jQuery);
+</script>
+</body>
+</html>
